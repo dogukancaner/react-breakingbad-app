@@ -41,7 +41,7 @@ function Home() {
       >
         {characters.map((character) => (
           <div className="rounded" key={character.char_id}>
-            <Link to="/">
+            <Link to="/characterdetail/2">
               <img
                 alt={character.name}
                 src={character.img}
