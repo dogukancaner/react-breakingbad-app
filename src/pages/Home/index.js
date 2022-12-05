@@ -14,15 +14,17 @@ function Home() {
   const characters = useSelector((state) => state.characters.items);
   const nextPage = useSelector((state) => state.characters.nextPage);
   const hasNextPage = useSelector((state) => state.characters.hasNextPage);
-  const isLoading = useSelector((state) => state.characters.isLoading);
+  const status = useSelector((state) => state.characters.status);
   const error = useSelector((state) => state.characters.error);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCharacters());
-  }, [dispatch]);
+    if (status === "idle") {
+      dispatch(fetchCharacters());
+    }
+  }, [dispatch, status]);
 
-  if (error) {
+  if (status === "failed") {
     return (
       <div>
         <Error message={error} />
@@ -31,7 +33,7 @@ function Home() {
   }
   return (
     <div>
-      <h1 className="text-center mt-3 mb-3 text-lg bg-gray-200 rounded-full py-2 px-4 font-bold">
+      <h1 className="text-center mt-3 mb-3 text-2xl bg-gray-200 rounded-full py-2 px-4 font-bold">
         Breaking Bad Character List
       </h1>
       <Masonry
@@ -39,9 +41,9 @@ function Home() {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {characters.map((character) => (
-          <div className="rounded" key={character.char_id}>
-            <Link to="/characterdetail/2">
+        {characters.map((character, index) => (
+          <div className="rounded" key={index}>
+            <Link to={`char/${character.char_id}`}>
               <img
                 alt={character.name}
                 src={character.img}
@@ -58,8 +60,8 @@ function Home() {
       </Masonry>
 
       <div className=" text-center">
-        {isLoading && <Loading />}
-        {hasNextPage && !isLoading && (
+        {status === "loading" && <Loading />}
+        {hasNextPage && status !== "loading" && (
           <button
             onClick={() => dispatch(fetchCharacters(nextPage))}
             className="bg-gray-200 hover:bg-white text-black font-bold py-2 px-4 rounded-full "
