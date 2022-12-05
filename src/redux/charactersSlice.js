@@ -20,7 +20,7 @@ export const charactersSlice = createSlice({
   initialState: {
     items: [],
     status: "idle",
-    page: 1,
+    page: 0,
     hasNextPage: true,
   },
   reducers: {},
