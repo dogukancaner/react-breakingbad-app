@@ -16,6 +16,7 @@ function Home() {
   const hasNextPage = useSelector((state) => state.characters.hasNextPage);
   const status = useSelector((state) => state.characters.status);
   const error = useSelector((state) => state.characters.error);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,11 +26,7 @@ function Home() {
   }, [dispatch, status]);
 
   if (status === "failed") {
-    return (
-      <div>
-        <Error message={error} />
-      </div>
-    );
+    return <Error message={error} />;
   }
   return (
     <div>
@@ -52,7 +49,6 @@ function Home() {
               <div className="text-center mb-2 mt-2">
                 <div>{character.name}</div>
                 <div>{character.nickname}</div>
-                <div>{character.occupation[0]}</div>
               </div>
             </Link>
           </div>

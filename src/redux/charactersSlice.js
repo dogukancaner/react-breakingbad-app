@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const char_limit = 12;
-
 export const fetchCharacters = createAsyncThunk(
   "characters/getcharacters",
   async (page) => {
     const res = await axios(
-      `https://www.breakingbadapi.com/api/characters?limit=10&offset=${
-        page * char_limit
+      `https://www.breakingbadapi.com/api/characters?limit=12&offset=${
+        page * 12
       }`
     );
     return res.data;
