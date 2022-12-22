@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const fetchCharacters = createAsyncThunk(
   "characters/getcharacters",
+
   async (page) => {
     const res = await axios(
       `https://www.breakingbadapi.com/api/characters?limit=12&offset=${

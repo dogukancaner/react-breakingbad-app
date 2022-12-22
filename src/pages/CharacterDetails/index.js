@@ -20,12 +20,12 @@ function CharacterDetails() {
       {loading && <Loading />}
       {char && (
         <div className="flex flex-col items-center  ">
-          <img alt="" className="mt-4" src={char.img} width={400} />
+          {/* <img alt="" className="mt-4" src={char.img} width={400} />
           <div className=" text-3xl font-bold mb-4 mt-4  ">{char.name} </div>
           <div>Nickname: {char.nickname}</div>
           <div>Birthday: {char.birthday}</div>
           <div>Occupation: {char.occupation[0]}</div>
-          <div>Status: {char.status}</div>
+          <div>Status: {char.status}</div> */}
         </div>
       )}
     </div>
